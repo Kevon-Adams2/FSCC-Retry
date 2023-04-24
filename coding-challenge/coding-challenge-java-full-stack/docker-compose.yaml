@@ -1,0 +1,48 @@
+version: "3.8"
+
+services:
+  employee_db_docker_image:
+    container_name: employee_container
+    build:
+      context: ./employee_db_docker_image
+      dockerfile: Dockerfile
+    environment:
+      MYSQL_ROOT_PASSWORD: qwerty
+      MYSQL_DATABASE: employee_db
+      MYSQL_USER: kevon
+      MYSQL_PASSWORD: qwerty
+      MYSQL_ROOT_HOST: 0.0.0.0
+    ports:
+      - 3307:3306
+    volumes:
+      - ./employee_db_docker_image/data.sql:/docker-entrypoint-initdb.d/data.sql
+  
+
+  # login_db_docker_image:
+  #   container_name: login_container
+  #   build:
+  #     context: ./login_db_docker_image
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=value
+  #   ports:
+  #     - 3308:3309
+
+
+  # employee_db:
+  #   image: mysql
+  #   restart: always
+  #   container_name: employee_container
+  #   build:
+  #     context: ./employee_db_docker_image
+  #     dockerfile: Dockerfile
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: qwerty
+  #     MYSQL_DATABASE: employee_db
+  #     MYSQL_USER: kevon
+  #     MYSQL_PASSWORD: qwerty
+  #     MYSQL_ROOT_HOST: 0.0.0.0
+  #   ports:
+  #     - 3306:3306
+  #   volumes:
+  #     - ./employee_db_docker_image/data.sql:/docker-entrypoint-initdb.d/data.sql
